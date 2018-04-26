@@ -16,8 +16,7 @@ var obstaculos=[];
 var luces=[];
 
 var comandos = Object.freeze({"Avanzar":1,"GirarDer":2,"GirarIzq":3,"Encender":4});
-
-listComandos = [comandos.Avanzar,comandos.GirarDer];
+var listaComandos = [];
 function drawCharacter(posX,posY){
     context.fillStyle="white";
     context.fillRect(posX,posY,blockSize/3,blockSize/3);
@@ -34,6 +33,14 @@ function init(rows,columns){;
         });
     } 
 }
+
+function Avanzar(){
+    listaComandos.push(comandos.Avanzar);
+}
+function GirarDer(){
+    listaComandos.push(comandos.GirarDer);
+}
+
 
 function drawMatrix(rows,columns){
     context.clearRect(0, 0, canvas.width, canvas.height);  
@@ -66,4 +73,5 @@ function moverPersonaje(personaje,posInicial,posFinal){
 var b = document.getElementById("bb");
 init(rows,columns)
 update()
+
 

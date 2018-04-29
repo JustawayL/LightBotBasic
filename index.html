@@ -7,16 +7,25 @@
 </head>
 <link rel = "stylesheet" type = "text/css" href = "style.css" />
 <body>
-    <canvas id="canvas" height="800" width="600">
-        Sorry, your browser does not support canvas.
-    </canvas>
-
-    <div id="bb">
-        <button id="b1" onclick="Avanzar()">Avanzar</button>
-        <button id="b2" onclick="GirarDer()">GirarDer</button>
-        <button id="b3" onclick="GirarIzq()">GirarIzq</button>
-        <button id="b4" onclick="Encender()">Encender</button>        
+    <div id="opcionesJuego">
+        <button id="play" onclick="play()">Play</button>
     </div>
+
+    <div id="juego">
+        <ul id="listaComandos"></ul>
+        <canvas id="canvas" height="800" width="600">
+            Sorry, your browser does not support canvas.
+        </canvas>
+    </div>
+
+
+    <div id="comandos">
+        <button id="b1" onclick="agregarComando(this)">Avanzar</button>
+        <button id="b2" onclick="agregarComando(this)">GirarDer</button>
+        <button id="b3" onclick="agregarComando(this)">GirarIzq</button>
+        <button id="b4" onclick="agregarComando(this)">Encender</button>        
+    </div>
+
 
 </body>
 <script src="app.js"></script>

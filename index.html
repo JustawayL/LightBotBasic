@@ -1,0 +1,42 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>LightBotBasic</title>
+</head>
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+
+<body>
+    <header>
+        <h1>LIGTHBOT WEB</h1>
+    </header>
+    <div class="bloque_tablero">
+        <div id="juego">
+            <canvas id="canvas" height="800" width="600">
+                Sorry, your browser does not support canvas.
+            </canvas>
+        </div>
+    </div>
+    <div class="bloque_acciones">
+        <div id="opcionesJuego">
+            <button id="play" onclick="play()">Play</button>
+        </div>
+    </div>
+    <div class="bloque_movimientos">
+        <ul id="listaComandos"></ul>
+    </div>
+    <div class="bloque_botones">
+        <button id="b1" onclick="agregarComando(this)">Avanzar</button>
+        <button id="b2" onclick="agregarComando(this)">GirarDer</button>
+        <button id="b3" onclick="agregarComando(this)">GirarIzq</button>
+        <button id="b4" onclick="agregarComando(this)">Encender</button>
+    </div>
+    <div class="bloque_mensajes"></div>
+    <footer></footer>
+
+</body>
+<script src="js/app.js"></script>
+
+</html>

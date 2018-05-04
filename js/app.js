@@ -2,8 +2,10 @@
 const blockSize = 70; 
 var canvas = document.getElementById("canvas");
 var context = canvas.getContext("2d");
-var rows =      [0,1,2,1];
-var columns =   [1,0,1,2];
+var nrows = [[0,1,2,1],[0,0,2,1]];
+var ncolumns = [[1,0,1,2],[0,1,2,1]];
+var rows =    nrows[0];
+var columns =   ncolumns[0];
 canvas.height = rows.length*blockSize;
 canvas.width = columns.length*blockSize;
 var obstaculos=[];
@@ -121,7 +123,7 @@ function ejecutarComando(comando){
             if (isLegalMove()) Avanzar();
             setTimeout(() => {
                 pause = true;}
-                ,1150);
+                ,500);
             break;
         case 2:
             GirarDer();
@@ -146,16 +148,16 @@ function Avanzar(){
     requestAnimationFrame(Avanzar);
     switch (personaje.orientacion){
         case 1:
-            personaje.posY -=1;
+            personaje.posY -=2.25;
             break;
         case 2: 
-            personaje.posY +=1;
+            personaje.posY +=2.25;
             break;
         case 3: 
-            personaje.posX +=1;
+            personaje.posX +=2.25;
             break;
         case 4: 
-            personaje.posX -=1;
+            personaje.posX -=2.25;
             break;
 
     }
@@ -200,19 +202,25 @@ function Encender(){
     personaje.lucesEncendidas.push(1);
 }
 
+function apagar(){
+    console.log("Apagar");
+    estadoLuz = "black";
+    personaje.lucesEncendidas.push(1);
+}
+
 
 function drawMatrix(rows,columns){
     context.clearRect(0, 0, canvas.width, canvas.height);  
     let list = Array.from(Array(columns.length).keys())
     for (let index = 0; index < rows.length; index++) {
         list.forEach(element => {
-            context.strokeStyle="black";
+            context.strokeStyle="#473049";
             if (columns[element] == 1 && rows[index] == 1){
-                context.fillStyle="red";
+                context.fillStyle="#952249";
             } else if (columns[element] == 2 && rows[index] == 2){
                 context.fillStyle = estadoLuz;
             } else {
-                context.fillStyle="green";                
+                context.fillStyle="#c7bfbd";                
             }
             context.strokeRect(blockSize*element,index*blockSize,blockSize,blockSize);  
             context.fillRect(blockSize*element,index*blockSize,blockSize,blockSize);                                  
@@ -230,7 +238,17 @@ function update(){
 function play(){
     let refreshIntervalId = setInterval(() => {
         pause = false;
-        if (personaje.lucesEncendidas.length >= luces.length) alert("Has ganado");
+        console.log("Corriendo");
+        if (personaje.lucesEncendidas.length >= luces.length) {
+			alert("Has ganado");
+			rows = nrows[1];
+			columns = ncolumns[1];
+			apagar();
+			reset();
+			obstaculos=[];
+			luces=[];
+			init(rows,columns);
+			}
         if (listaComandos.length > 0) {
            ejecutarComando(listaComandos.shift());
         }else {
@@ -246,8 +264,19 @@ function play(){
             };
 
         }
-    },2000);
+    },1000);
 }
+
+function reset(){
+	limpiarListaComandosUI();
+            listaComandos = [];
+            personaje = {
+                posX : blockSize/3,
+                posY : blockSize/3,
+                orientacion: orientaciones.Este,
+                lucesEncendidas: []
+			};
+	}
 
 function moverPersonaje(personaje,posInicial,posFinal){
     context.clearRect(0, 0, canvas.width, canvas.height);      

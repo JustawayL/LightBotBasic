@@ -12,6 +12,8 @@ var obstaculos=[];
 var luces=[];
 var estadoLuz = "black"
 
+//TODO: crear un contador para cambiar niveles.
+
 var comandos = Object.freeze({"Avanzar":1,"GirarDer":2,"GirarIzq":3,"Encender":4});
 var orientaciones = Object.freeze({"Norte":1,"Sur":2,"Este":3,"Oeste":4});
 

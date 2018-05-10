@@ -4,10 +4,9 @@ var canvas = document.getElementById("canvas");
 var context = canvas.getContext("2d");
 var nrows = [[0,1,2,1],[0,0,2,1]];
 var ncolumns = [[1,0,1,2],[0,1,2,1]];
-var rows =    nrows[0];
-var columns =   ncolumns[0];
-canvas.height = rows.length*blockSize;
-canvas.width = columns.length*blockSize;
+var nivelActual = 0;
+canvas.height = nrows[nivelActual].length*blockSize;
+canvas.width = ncolumns[nivelActual].length*blockSize;
 var obstaculos=[];
 var luces=[];
 var estadoLuz = "black"
@@ -232,7 +231,7 @@ function drawMatrix(rows,columns){
 }
 function update(){
     requestAnimationFrame(update);
-    drawMatrix(rows, columns,70);
+    drawMatrix(nrows[nivelActual], ncolumns[nivelActual],70);
     drawCharacter(personaje.posX,personaje.posY);
     personaje.posX
 }
@@ -243,13 +242,12 @@ function play(){
         console.log("Corriendo");
         if (personaje.lucesEncendidas.length >= luces.length) {
 			alert("Has ganado");
-			rows = nrows[1];
-			columns = ncolumns[1];
+			nivelActual+=1;
 			apagar();
 			reset();
 			obstaculos=[];
 			luces=[];
-			init(rows,columns);
+			init(nrows[nivelActual],ncolumns[nivelActual]);
 			}
         if (listaComandos.length > 0) {
            ejecutarComando(listaComandos.shift());
@@ -283,7 +281,7 @@ function reset(){
 function moverPersonaje(personaje,posInicial,posFinal){
     context.clearRect(0, 0, canvas.width, canvas.height);      
 }
-init(rows,columns);
+init(nrows[nivelActual],ncolumns[nivelActual]);
 update();
 
 
